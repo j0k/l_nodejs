@@ -1,0 +1,48 @@
+npm i connect
+npm i serve-static
+npm i ws
+
+--- web example:
+
+Last message: web104: he-he
+
+    INIT: web104
+    web104: some
+    web104: hi, server
+    INIT: console101
+    console101: Hello, guy!
+    INIT: console149
+    console149: Hello, guy!
+    web104: he-he
+
+--- server log stdout:
+
+<<$ node.exe server.js
+Listen:8001
+new ID:0
+{"id":"INIT","msg":"web104"}
+{"id":"web104","msg":"some"}
+{"id":"web104","msg":"hi, server"}
+new ID:1
+{"id":"INIT","msg":"console101"}
+{"id":"console101","msg":"Hello, guy!"}
+ws.on.close
+new ID:2
+{"id":"INIT","msg":"console149"}
+{"id":"console149","msg":"Hello, guy!"}
+ws.on.close
+{"id":"web104","msg":"he-he"}
+
+--- console part:
+
+<<$ node c_client.js
+SEND: {"id":"INIT","msg":"console101"}
+SEND: {"id":"console101","msg":"Hello, guy!"}
+Server says: INIT: console101
+Server says: console101: Hello, guy!
+
+<<$ node c_client.js
+SEND: {"id":"INIT","msg":"console149"}
+SEND: {"id":"console149","msg":"Hello, guy!"}
+Server says: INIT: console149
+Server says: console149: Hello, guy!
